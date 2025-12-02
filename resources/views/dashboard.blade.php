@@ -57,10 +57,10 @@
                             Keuangan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('bukukas') }}">BUKU BESAR</a></li>
-                            <li><a class="dropdown-item" href="{{ route('naraca') }}">NERACA</a></li>
-                             <li><a class="dropdown-item" href="{{ route('labarugi') }}">LABA RUGI</a></li>
-                            <li><a class="dropdown-item" href="{{ route('aruskas') }}">ARUS KAS</a></li>
+                            <li><a class="dropdown-item" href="bukubesar">BUKU BESAR</a></li>
+                            <li><a class="dropdown-item" href="#">NERACA</a></li>
+                             <li><a class="dropdown-item" href="#">LABA RUGI</a></li>
+                            <li><a class="dropdown-item" href="#">ARUS KAS</a></li>
                              <li><a class="dropdown-item" href="#">TRIAL BALANCE</a></li>
           
                             <!-- Menggunakan <li> untuk pembagi -->

@@ -85,7 +85,7 @@
                   <span class="d-flex">
                     <i class="ti ti-aperture"></i>
                   </span>
-                  <span class="hide-menu">Analytical</span>
+                  <span class="hide-menu">Naraca</span>
                 </div>
 
               </a>

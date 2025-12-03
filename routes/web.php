@@ -9,12 +9,12 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
-Route::get('/bukubesar',[DashboardController::class, 'index'] );
+Route::get('/bukubesar',[BukuBesarController::class, 'index'] )->name('bukubesar');
 Route::get('/neraca',[DashboardController::class, 'index'] );
 Route::get('/labarugi',[DashboardController::class, 'index'] );
 Route::get('/aruskas',[DashboardController::class, 'index'] );
 Route::get('/balance    ',[DashboardController::class, 'index'] );
-    
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -29,5 +29,5 @@ Route::get ('password/lost','ForgotPasswordController@forgotPassword');
 // --- ROUTE UTAMA (/) DIARAHKAN KE VIEW DASHBOARD ---
 Route::get('/', function () {
     // Menunjuk ke resources/views/dashboard.blade.php
-    return view('layouts.app'); 
+    return view('layouts.app');
 })->name('layouts.app');

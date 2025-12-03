@@ -24,12 +24,12 @@
         <div class="d-none d-xl-flex align-items-center gap-3 border-start border-white border-opacity-25 ps-9">
           <a target="_blank" href="
             class="link-hover d-flex align-items-center gap-2 border-0 text-white lh-sm fs-4">
-          
-          
+
+
         </div>
       </div>
 
-      
+
         <div class="d-sm-flex align-items-center justify-content-center gap-8">
           <div class="d-flex align-items-center justify-content-center gap-8">
             <div class="dropdown d-flex">
@@ -44,7 +44,7 @@
 
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-6"></i>
           </div>
-   
+
 
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
@@ -70,7 +70,7 @@
 
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{ route('bukubesar') }}" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">BUKU BESAR</span>
               </a>
@@ -99,7 +99,7 @@
                   </span>
                   <span class="hide-menu">eCommerce</span>
                 </div>
-               
+
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link justify-content-between has-arrow" href="javascript:void(0)" aria-expanded="false">
@@ -202,8 +202,8 @@
               <span class="sidebar-divider lg"></span>
             </li>
 
-            
-                
+
+
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>

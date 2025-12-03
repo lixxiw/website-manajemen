@@ -60,77 +60,20 @@
                 </div>
             </div>
         </div>
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/logo.svg" alt="" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-6"></i>
-          </div>
-
-
-        <!-- Sidebar navigation-->
+        <aside class="left-sidebar">
+            <div class="p-3">
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <a href="./index.html" class="text-nowrap logo-img">
+                        <img src="../assets/images/logos/logo.svg" alt="" />
+                    </a>
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-6"></i>
+                    </div>
+                  <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
-     <H2>AKUNTANSI</H2>
+     <h2>AKUNTANSI</H2>
 
-<<<<<<< HEAD
-    <!-- TABLE -->
-    <div class="card shadow-sm p-4">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>date_transaction</th>
-                    <th>Saldo Awal</th>
-                    <th>Debit</th>
-                    <th>Kredit</th>
-                    <th>Saldo Akhir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>5/1/2025</td>
-                    <td>1207049260</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>1207049260</td>
-                </tr>
-                <tr>
-                    <td>6/1/2025</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>7/1/2025</td>
-                    <td>17020000</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>17020000</td>
-                </tr>
-                <tr>
-                    <td>5/2/2025</td>
-                    <td>17020000</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>17020000</td>
-                </tr>
-                <tr>
-                    <td>7/2/2025</td>
-                    <td>17020000</td>
-                    <td>0,00</td>
-                    <td>0,00</td>
-                    <td>17020000</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-=======
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('bukubesar') }}" aria-expanded="false">
@@ -148,9 +91,8 @@
                   <span class="d-flex">
                     <i class="ti ti-aperture"></i>
                   </span>
-                  <span class="hide-menu">Analytical</span>
+                  <span class="hide-menu">Naraca</span>
                 </div>
->>>>>>> ec7e771f124f7db215997cdc48ce94310ddb89a8
 
               </a>
             </li>
@@ -265,7 +207,6 @@
             <li>
               <span class="sidebar-divider lg"></span>
             </li>
-
 
         </aside>
         <div class="body-wrapper">

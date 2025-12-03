@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/login.css') }}">
     
     <!-- Link Font Awesome untuk Ikon Media Sosial -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5jXF5G/Yg2/j8+I5p0tJz8o+A2i5n8aF5O5F4F5d5A5B5A5C5D5E5F5G5H5I5J5K5L5M5N5O5P5Q5R5S5T5U5V5W5X5Y5Z" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5jXF5G/Yg2/j8+I5p0tJz8o+A2i5n8aF5O5F4F5d5A5B5A5C5D5E5F5G5H5I5J5K5L5M5N5O5P5Q5R5S5T5U5V5W5X5Y5Z" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <!-- Style tambahan jika tidak menggunakan login.css -->
     <style>
@@ -83,7 +83,7 @@
                                 placeholder="Enter a valid email address"
                                 required
                             />
-                            <label class="form-label" for="emailInput">Email address</label>
+                            <label class="form-label" for="emailInput"></label>
                         </div>
 
                         <!-- Password input -->
@@ -96,7 +96,7 @@
                                 placeholder="Enter password"
                                 required
                             />
-                            <label class="form-label" for="passwordInput">Password</label>
+                            <label class="form-label" for="passwordInput"></label>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">

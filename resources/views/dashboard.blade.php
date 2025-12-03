@@ -33,11 +33,14 @@
         <div class="d-sm-flex align-items-center justify-content-center gap-8">
           <div class="d-flex align-items-center justify-content-center gap-8">
             <div class="dropdown d-flex">
-              <a class="btn live-preview-drop fs-4 lh-sm btn-outline-primary rounded border-white border border-opacity-40 text-white d-flex align-items-center gap-2 px-3 py-2"
+              <form action="{{ route ('logout') }}" method="POST">
+                @csrf
+              <button class="btn live-preview-drop fs-4 lh-sm btn-outline-primary rounded border-white border border-opacity-40 text-white d-flex align-items-center gap-2 px-3 py-2"
                 href="javascript:void(0)" id="drop3" data-bs-toggle="dropdown" aria-expanded="false">
                LOG OUT
 
-              </a>
+              </button>
+              </form>
 
               </div>
             </div>

@@ -6,9 +6,12 @@ use App\Http\Controllers\BukuBesarController;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home');
 Route::get('/bukubesar',[BukuBesarController::class, 'index'] )->name('bukubesar');
 Route::get('/neraca',[DashboardController::class, 'index'] );
 Route::get('/labarugi',[DashboardController::class, 'index'] );
@@ -29,5 +32,5 @@ Route::get ('password/lost','ForgotPasswordController@forgotPassword');
 // --- ROUTE UTAMA (/) DIARAHKAN KE VIEW DASHBOARD ---
 Route::get('/', function () {
     // Menunjuk ke resources/views/dashboard.blade.php
-    return view('layouts.app');
-})->name('layouts.app');
+    return view('layouts.home');
+})->name('layouts.home');

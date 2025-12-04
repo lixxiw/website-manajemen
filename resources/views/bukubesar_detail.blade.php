@@ -135,7 +135,9 @@
                         <nav class="breadcrumb">
                             <a class="breadcrumb-item text-decoration-none" href="#">Home</a>
                             <a class="breadcrumb-item text-decoration-none" href="{{ route('dashboard') }}">Dashboard</a>
+                            <a class="breadcrumb-item text-decoration-none" href="{{ route('bukubesar') }}">bukubesar</a>
                             <span class="breadcrumb-item active">Buku Besar</span>
+
                         </nav>
                     </div>
 
@@ -152,15 +154,12 @@
                             <div class="col-md-6 d-flex align-items-end gap-2">
     <button class="btn btn-primary" id="filterBtn">Tampilkan</button>
     <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">Export Excel</a>
-    <a href="{{ route('bukubesar.detail') }}" class="btn btn-warning">Detail Buku Besar</a>
 </div>
 
                         </div>
                     </div>
 
-                    <h4 class="mb-3 fw-bold">
-                        📘 Buku Besar | Tanggal Awal : - , Tanggal Akhir : -
-                    </h4>
+
 
                     <div class="card shadow-sm p-4">
                         <table class="table table-bordered table-hover">

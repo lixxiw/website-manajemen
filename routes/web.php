@@ -25,6 +25,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // --- LUPA PASSWORD ---
 Route::get('password/lost', 'ForgotPasswordController@forgotPassword');
+// Buku Besar export Excel
+Route::get('/bukubesar/export', [BukuBesarController::class, 'exportExcel'])->name('bukubesar.export');
+
+// Buku Besar detail (test doang)
+Route::get('/bukubesar/detail', [BukuBesarController::class, 'detail'])->name('bukubesar.detail');
 
 // --- ROUTE UTAMA (/), REDIRECT SESUAI ROLE ---
 Route::get('/', function () {

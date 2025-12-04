@@ -271,7 +271,7 @@
                                     <td>0.00</td>
                                 </tr>
                                 <tr>
-                                    <td>5/1/2025l</td>
+                                    <td>2025/1/5</td>
                                     <td>17020000</td>
                                     <td>0,00</td>
                                     <td>0,00</td>
@@ -292,6 +292,42 @@
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
     <script src="../assets/js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btnTampilkan = document.querySelector('.btn.btn-primary');
+    const inputs = document.querySelectorAll('input[type="date"]');
+    const startInput = inputs[0];
+    const endInput = inputs[1];
+    const titleBuku = document.querySelector('h4.mb-3.fw-bold');
+    const table = document.querySelector('table.table-bordered');
+
+    btnTampilkan.addEventListener('click', function() {
+        const startDate = startInput.value ? new Date(startInput.value) : null;
+        const endDate = endInput.value ? new Date(endInput.value) : null;
+
+        // Update judul
+        titleBuku.innerText = `📘 Buku Besar | Tanggal Awal : ${startInput.value || '-'} , Tanggal Akhir : ${endInput.value || '-'}`;
+
+        // Filter baris tabel
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            let dateText = row.cells[0].innerText.replace('l','').trim(); // hapus typo
+            let dateParts = dateText.split('/');
+            if(dateParts.length === 3) {
+                let date = new Date(dateParts[2], dateParts[0]-1, dateParts[1]);
+                if(startDate && endDate) {
+                    row.style.display = (date >= startDate && date <= endDate) ? '' : 'none';
+                } else {
+                    row.style.display = '';
+                }
+            } else {
+                row.style.display = '';
+            }
+        });
+    });
+});
+</script>
+
 </body>
 
 </html>

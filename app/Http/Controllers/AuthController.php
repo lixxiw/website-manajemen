@@ -32,24 +32,32 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $rememberMe = $request->filled('remember'))) {
             $request->session()->regenerate();
 
             // Ambil user yang login
             $user = Auth::user();
 
+            // validasi home setelah login
+            $welcomeMessage = 'Selamat datang' . ', ' . $user->name . '!';
+
+            //remember me
+            $rememberMe = $request->filled('remember');
+            
             // Redirect sesuai role
             if ($user->role === 'admin') {
-                return redirect()->intended('/dashboard'); // admin ke dashboard
+                return redirect()->intended('/dashboard')-> with('login', $welcomeMessage); // admin ke dashboard
             } else {
-                return redirect()->intended('/'); // user biasa ke home
-            }
+                return redirect()->intended('/')-> with('login', $welcomeMessage); // user biasa ke home
+            } 
+            
         }
 
         // Jika otentikasi gagal
         return back()->withErrors([
             'email' => 'Email atau password salah!',
         ])->onlyInput('email');
+        
     }
 
     /**

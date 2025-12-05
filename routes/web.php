@@ -32,14 +32,7 @@ Route::get('/bukubesar/export', [BukuBesarController::class, 'exportExcel'])->na
 Route::get('/bukubesar/detail', [BukuBesarController::class, 'detail'])->name('bukubesar.detail');
 
 // --- ROUTE UTAMA (/), REDIRECT SESUAI ROLE ---
-Route::get('/', function () {
-    if (auth()->check()) {
-        return auth()->user()->role === 'admin'
-            ? redirect()->route('dashboard')
-            : redirect()->route('home');
-    }
-    return redirect()->route('login');
-})->name('home.redirect');
+Route::get('/', [HomeController::class, 'index'])->name('home.redirect');
 
 // --- ROUTE YANG PERLU LOGIN ---
 Route::middleware(['auth'])->group(function() {

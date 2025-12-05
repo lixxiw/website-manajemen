@@ -85,6 +85,17 @@
     <main class="py-4">
         <div class="container">
 
+            <div class="container-fluid">
+    
+    @if(session('login'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('login') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    </div>
+
             <!-- Hero Section -->
             <div class="hero mb-5">
                 <div class="row align-items-center">

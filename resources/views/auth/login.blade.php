@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="{{ asset('assets/login.css') }}">
     
     <!-- Link Font Awesome untuk Ikon Media Sosial -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5jXF5G/Yg2/j8+I5p0tJz8o+A2i5n8aF5O5F4F5d5A5B5A5C5D5E5F5G5H5I5J5K5L5M5N5O5P5Q5R5S5T5U5V5W5X5Y5Z" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- Style tambahan jika tidak menggunakan login.css -->
     <style>
         /* Mengatasi MDB form-outline jika tidak menggunakan MDB JS */
+        /* CSS ini dipertahankan dari input Anda */
         .form-outline .form-control {
             padding-top: 1.5rem;
         }
@@ -38,6 +39,14 @@
         .h-custom {
             height: calc(100% - 73px);
         }
+        /* Tambahkan style untuk divider jika belum ada */
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +64,21 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf <!-- Token CSRF wajib di Laravel -->
 
-                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                        {{-- ALERT BOX for Login Error --}}
+                        {{-- Laravel biasanya menggunakan $errors->has('email') untuk kegagalan login --}}
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Login Failed:</strong> {{ $errors->first('email') }} 
+                            </div>
+                        {{-- Atau jika menggunakan pesan flash generik (contoh: status/error) --}}
+                        @elseif (session('status'))
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Error:</strong> {{ session('status') }} 
+                            </div>
+                        @endif
+                        {{-- END ALERT BOX --}}
+
+                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mt-4">
                             <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                             <!-- Tombol Sosial -->
                             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -75,6 +98,7 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
+                            <H5>EMAIL:</H5>
                             <input 
                                 type="email" 
                                 id="emailInput" 
@@ -88,6 +112,7 @@
 
                         <!-- Password input -->
                         <div class="form-outline mb-3">
+                            <h5>Password:</h5>
                             <input 
                                 type="password" 
                                 id="passwordInput" 
@@ -146,6 +171,5 @@
 
     <!-- BOOTSTRAP 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Anda mungkin perlu JS MDB jika menggunakan komponen yang lebih kompleks -->
 </body>
 </html>

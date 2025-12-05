@@ -165,7 +165,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>date_transaction</th>
+                                    <th>account</th>
                                     <th>Saldo Awal</th>
                                     <th>Debit</th>
                                     <th>Kredit</th>

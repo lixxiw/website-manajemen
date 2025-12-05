@@ -11,46 +11,34 @@
 
     <style>
         /* ================================================= */
-        /* PERBAIKAN TATA LETAK UTAMA: MEMBUAT KONTEN DI TENGAH AREA PUTIH YANG TERSISA */
+        /* PERBAIKAN TATA LETAK UTAMA */
         /* ================================================= */
 
-        /* 1. BODY WRAPPER: Menentukan Posisi dan Lebar Area Konten Utama */
         .body-wrapper {
             border: none !important;
             box-shadow: none !important;
-
-            /* PENTING: Menggeser konten utama ke kanan sebesar lebar sidebar */
             margin-left: 270px !important;
-
-            /* Menghapus padding default yang mungkin menyebabkan geser */
             padding-left: 0 !important;
             padding-right: 0 !important;
-            padding-top: 20px !important; /* Beri sedikit jarak dari atas */
-
-            /* Memastikan area konten utama memenuhi sisa ruang */
+            padding-top: 20px !important;
             width: calc(100% - 270px);
             min-height: 100vh;
         }
 
-        /* 2. KONTEN TENGAH: Atur Lebar Maksimal Konten dan Pusat di area yang tersisa */
         .my-custom-center-container {
             max-width: 1200px;
             width: 95%;
-
-            /* PENTING: Pusatkan konten di dalam body-wrapper yang sudah digeser */
             margin-left: auto !important;
             margin-right: auto !important;
-
-            /* Jarak internal agar tidak menempel ke sisi body-wrapper */
             padding-left: 15px;
             padding-right: 15px;
         }
 
-        /* 3. Penyesuaian Global */
         .container-fluid {
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
+
         .page-wrapper, #main-wrapper {
             border: none !important;
             box-shadow: none !important;
@@ -61,15 +49,13 @@
         }
 
         /* ================================================= */
-        /* CSS TEMA GELAP (Dark Mode) UNTUK SIDEBAR */
+        /* DARK MODE SIDEBAR */
         /* ================================================= */
 
-        /* Latar belakang Sidebar */
         .left-sidebar {
             background-color: #2a3547 !important;
         }
 
-        /* Judul Menu */
         .left-sidebar h2 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -80,7 +66,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Tautan Menu (Normal) */
         .sidebar-item .sidebar-link {
             color: #c4d0e2 !important;
             transition: all 0.2s ease-in-out;
@@ -88,30 +73,57 @@
             font-weight: 500;
         }
 
-        /* Icon Menu (Normal) */
         .sidebar-item .sidebar-link i {
             color: #c4d0e2 !important;
         }
 
-        /* Tautan Menu (Saat Aktif) */
         .sidebar-item .sidebar-link.active {
-            background-color: #5d87ff !important; /* Warna biru sebagai highlight */
+            background-color: #5d87ff !important;
             color: #ffffff !important;
             font-weight: 600;
         }
 
-        /* Icon Menu (Saat Aktif) */
         .sidebar-item .sidebar-link.active i {
             color: #ffffff !important;
         }
 
-        /* Menghilangkan Divider jika ada */
         .sidebar-divider {
             display: none !important;
         }
 
-        /* Style Konten Tambahan (dihapus karena konten dikosongkan) */
-        /* .card { border-radius: 12px; } */
+        /* ================================================= */
+        /* LOGOUT PALING BAWAH + JADI TOMBOL MERAH */
+        /* ================================================= */
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+        }
+
+        .sidebar-logout-btn {
+            background-color: #ff4d4f !important;
+            color: #ffffff !important;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s ease-in-out;
+        }
+
+        .sidebar-logout-btn i {
+            color: #ffffff !important;
+            font-size: 18px;
+        }
+
+        .sidebar-logout-btn:hover {
+            background-color: #e04344 !important;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -129,10 +141,11 @@
                         <i class="ti ti-x fs-6"></i>
                     </div>
                 </div>
+
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
                         <h2 class="ps-3 pt-3">AKUNTANSI</h2>
-                        
+
                         <li class="sidebar-item">
                             <a class="sidebar-link active" href="{{ route('dashboard') }}" aria-expanded="false">
                                 <i class="ti ti-layout-dashboard"></i>
@@ -153,13 +166,29 @@
                                 <span class="hide-menu">Laporan</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="#" aria-expanded="false">
                                 <i class="ti ti-settings"></i>
                                 <span class="hide-menu">Pengaturan</span>
                             </a>
                         </li>
+
+                        <!-- =========================== -->
+                        <!-- MENU LOGOUT PALING BAWAH    -->
+                        <!-- =========================== -->
+                        <li class="sidebar-item sidebar-bottom">
+                            <a class="sidebar-logout-btn" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ti ti-logout"></i>
+                                <span>Logout</span>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+
                     </ul>
                 </nav>
             </div>
@@ -168,19 +197,20 @@
         <div class="body-wrapper">
             <div class="container-fluid">
                 <div class="container my-custom-center-container">
-                    </div>
-                    @if(session('login'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                </div>
+
+                @if(session('login'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('login') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
+                </div>
+                @endif
 
-                    <!-- konten dashboard di sini -->
+                <!-- konten dashboard di sini -->
             </div>
         </div>
     </div>
-    
+
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>

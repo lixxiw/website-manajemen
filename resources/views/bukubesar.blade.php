@@ -11,50 +11,34 @@
 
     <style>
         /* ================================================= */
-        /* PERBAIKAN TATA LETAK UTAMA: MEMBUAT KONTEN DI TENGAH AREA PUTIH YANG TERSISA */
+        /* PERBAIKAN TATA LETAK UTAMA */
         /* ================================================= */
 
-        /* 1. BODY WRAPPER: Menentukan Posisi dan Lebar Area Konten Utama */
         .body-wrapper {
-            border: none !important; 
+            border: none !important;
             box-shadow: none !important;
-            
-            /* PENTING: Menggeser konten utama ke kanan sebesar lebar sidebar */
-            /* Lebar sidebar default Modernize adalah sekitar 270px */
-            margin-left: 270px !important; 
-            
-            /* Menghapus padding default yang mungkin menyebabkan geser */
-            padding-left: 0 !important; 
-            padding-right: 0 !important; 
-            padding-top: 20px !important; /* Beri sedikit jarak dari atas */
-            
-            /* Memastikan area konten utama memenuhi sisa ruang */
-            width: calc(100% - 270px); /* Opsi lain: agar lebar konten menyesuaikan sisa layar */
+            margin-left: 270px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            padding-top: 20px !important;
+            width: calc(100% - 270px);
             min-height: 100vh;
         }
 
-        /* 2. KONTEN TENGAH: Atur Lebar Maksimal Konten dan Pusat di area yang tersisa */
         .my-custom-center-container {
-            /* Konten di dalamnya diatur agar rapi (misal 95% lebar) */
-            max-width: 1200px; 
-            width: 95%; 
-            
-            /* PENTING: Pusatkan konten di dalam body-wrapper yang sudah digeser */
+            max-width: 1200px;
+            width: 95%;
             margin-left: auto !important;
-            margin-right: auto !important; 
-            
-            /* Jarak internal agar tidak menempel ke sisi body-wrapper */
+            margin-right: auto !important;
             padding-left: 15px;
             padding-right: 15px;
         }
-        
-        /* 3. Penyesuaian Global */
+
         .container-fluid {
-            /* Pastikan container-fluid tidak memiliki padding horizontal yang berlebihan */
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
-        /* Hapus margin otomatis jika ada */
+
         .page-wrapper, #main-wrapper {
             border: none !important;
             box-shadow: none !important;
@@ -62,58 +46,84 @@
         }
 
         /* ================================================= */
-        /* CSS LAMA LAINNYA & TEMA GELAP SIDEBAR */
+        /* DARK MODE SIDEBAR */
         /* ================================================= */
 
-        .card { border-radius: 12px; }
-        table thead {
-            background: #eaeaea;
-            color: #000;
-            font-weight: bold;
-        }
-        .title-section {
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .breadcrumb {
-            font-size: 14px;
+        .left-sidebar {
+            background-color: #2a3547 !important;
         }
 
-        /* CSS TEMA GELAP (Dark Mode) UNTUK SIDEBAR */
-        .left-sidebar {
-            background-color: #2a3547 !important; 
-        }
         .left-sidebar h2 {
-            font-size: 1.1rem; 
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #ffffff !important; 
+            color: #ffffff !important;
             margin-top: 15px;
             margin-bottom: 10px;
             padding: 0 15px;
             letter-spacing: 0.5px;
         }
+
         .sidebar-item .sidebar-link {
-            color: #c4d0e2 !important; 
+            color: #c4d0e2 !important;
             transition: all 0.2s ease-in-out;
             border-radius: 7px;
             font-weight: 500;
         }
+
         .sidebar-item .sidebar-link i {
-            color: #c4d0e2 !important; 
+            color: #c4d0e2 !important;
         }
+
         .sidebar-item .sidebar-link.active {
-            background-color: #5d87ff !important; 
+            background-color: #5d87ff !important;
             color: #ffffff !important;
             font-weight: 600;
         }
+
         .sidebar-item .sidebar-link.active i {
             color: #ffffff !important;
         }
+
         .sidebar-divider {
             display: none !important;
         }
+
         .app-topstrip {
             display: none !important;
+        }
+
+        /* ================================================= */
+        /* TOMBOL LOGOUT PALING BAWAH */
+        /* ================================================= */
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+        }
+
+        .sidebar-logout-btn {
+            background-color: #ff4d4f !important;
+            color: #ffffff !important;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s ease-in-out;
+        }
+
+        .sidebar-logout-btn i {
+            color: #ffffff !important;
+            font-size: 18px;
+        }
+
+        .sidebar-logout-btn:hover {
+            background-color: #e04344 !important;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -132,37 +142,54 @@
                         <i class="ti ti-x fs-6"></i>
                     </div>
                 </div>
+
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
                         <h2 class="ps-3 pt-3">AKUNTANSI</h2>
-                        
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('dashboard') }}">
                                 <i class="ti ti-layout-dashboard"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link active" href="{{ route('bukubesar') }}" aria-expanded="false">
-                                <i class="ti ti-notebook"></i> 
+                            <a class="sidebar-link active" href="{{ route('bukubesar') }}">
+                                <i class="ti ti-notebook"></i>
                                 <span class="hide-menu">Buku Besar</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="#" aria-expanded="false">
+                            <a class="sidebar-link" href="#">
                                 <i class="ti ti-report"></i>
                                 <span class="hide-menu">Laporan</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="#" aria-expanded="false">
+                            <a class="sidebar-link" href="#">
                                 <i class="ti ti-settings"></i>
                                 <span class="hide-menu">Pengaturan</span>
                             </a>
                         </li>
+
+                        <!-- =========================== -->
+                        <!-- LOGOUT PALING BAWAH         -->
+                        <!-- =========================== -->
+                        <li class="sidebar-item sidebar-bottom">
+                            <a class="sidebar-logout-btn" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ti ti-logout"></i>
+                                <span>Logout</span>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+
                     </ul>
                 </nav>
             </div>
@@ -227,11 +254,13 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
+
     </div>
-    
+
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
@@ -240,44 +269,11 @@
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
     <script src="../assets/js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-    <script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     const btnTampilkan = document.getElementById('filterBtn');
     const startInput = document.getElementById('startDate');
     const endInput = document.getElementById('endDate');
     const titleBuku = document.querySelector('h4.mb-3.fw-bold');
     const table = document.querySelector('table.table-bordered');
-
-    btnTampilkan.addEventListener('click', function() {
-        const startDate = startInput.value ? new Date(startInput.value) : null;
-        const endDate = endInput.value ? new Date(endInput.value) : null;
-        
-        titleBuku.innerText = `📘 Buku Besar | Tanggal Awal : ${startInput.value || '-'} , Tanggal Akhir : ${endInput.value || '-'}`;
-
-        const rows = table.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-            let dateParts = row.cells[0].innerText.split('/');
-            if(dateParts.length === 3) {
-                let date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-                
-                let isVisible = true;
-                
-                if (startDate && date < startDate) {
-                    isVisible = false;
-                }
-                if (endDate && date > endDate) {
-                    isVisible = false;
-                }
-
-                row.style.display = isVisible ? '' : 'none';
-            } else {
-                row.style.display = '';
-            }
-        });
-    });
-});
-</script>
-
-</body>
-
-</html>  

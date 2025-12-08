@@ -15,6 +15,8 @@ use App\Http\Controllers\HomeController;
 | Di sini tempat mendefinisikan semua route web aplikasi.
 |
 */
+Route::get('/bukubesar/filter', [BukuBesarController::class, 'filter'])
+    ->name('bukubesar.filter');
 
 // --- LOGIN / REGISTER / LOGOUT ---
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

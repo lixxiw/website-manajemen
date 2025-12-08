@@ -289,33 +289,41 @@
 
                     <!-- FILTER -->
                     <div class="filter-card shadow-sm mb-4">
-                        <div class="row g-3">
-                            <div class="col-md-3">
-                                <label>Tanggal Awal :</label>
-                                <input type="date" class="form-control" id="startDate">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Tanggal Akhir :</label>
-                                <input type="date" class="form-control" id="endDate">
-                            </div>
-                            <div class="col-md-6 d-flex align-items-end gap-3">
-                                <button class="btn btn-primary" id="filterBtn">Tampilkan</button>
-                                <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">
-                                    Export Excel
-                                </a>
+                        <form action="{{ route('bukubesar.filter') }}" method="GET">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label>Tanggal Awal :</label>
+            <input type="date" class="form-control" name="start" required>
+        </div>
 
-                                <!-- TOMBOL PRINT YANG DITAMBAHKAN -->
-                                <button class="btn btn-success text-white" id="printBtn">
-                                    Print
-                                </button>
-                            </div>
-                        </div>
+        <div class="col-md-3">
+            <label>Tanggal Akhir :</label>
+            <input type="date" class="form-control" name="end" required>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end gap-3">
+            <button class="btn btn-primary" type="submit">Tampilkan</button>
+
+            <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">
+                Export Excel
+            </a>
+
+            <button class="btn btn-success text-white" id="printBtn">
+                Print
+            </button>
+        </div>
+    </div>
+</form>
+
                     </div>
 
                     <!-- TITLE -->
                     <h4 class="section-title">
-                        📘 Buku Besar | Tanggal Awal : - , Tanggal Akhir : -
-                    </h4>
+    📘 Buku Besar | Tanggal Awal: {{ $start ?? '-' }} ,
+    Tanggal Akhir: {{ $end ?? '-' }} |
+    Saldo Awal: {{ number_format($saldo_awal ?? 0,0,',','.') }}
+</h4>
+
 
                     <!-- TABLE -->
                     <div class="table-container shadow-sm">

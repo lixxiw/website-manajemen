@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard | Modernize Admin Template</title>
+    <title>Dashboard | Aplikasi Keuangan</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
 
     <style>
         /* ================================================= */
@@ -35,6 +36,7 @@
         }
 
         .container-fluid {
+            /* Pastikan container-fluid tidak mengganggu layout utama */
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
@@ -124,6 +126,18 @@
             background-color: #e04344 !important;
             transform: translateY(-2px);
         }
+
+        .breadcrumb {
+            font-size: 14px;
+        }
+        
+        /* Style untuk section title */
+        .title-section {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -174,9 +188,6 @@
                             </a>
                         </li>
 
-                        <!-- =========================== -->
-                        <!-- MENU LOGOUT PALING BAWAH    -->
-                        <!-- =========================== -->
                         <li class="sidebar-item sidebar-bottom">
                             <a class="sidebar-logout-btn" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -196,17 +207,31 @@
 
         <div class="body-wrapper">
             <div class="container-fluid">
-                <div class="container my-custom-center-container">
-                </div>
+                <div class="my-custom-center-container">
+                    
+                    @if(session('login'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('login') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
 
-                @if(session('login'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('login') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
+                    <div class="title-section">Keuangan & Akuntansi</div>
+                    
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('bukubesar') }}">Buku Besar</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Lihat Detail</li>
+                        </ol>
+                    </nav>
+                    
+                    <div class="row">
+                        </div>
 
-                <!-- konten dashboard di sini -->
+
+                </div>
             </div>
         </div>
     </div>

@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Keuangan Laravel</title>
 
-    <!-- BOOTSTRAP 5 CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- DATATABLES CSS (Bootstrap 5 Style) -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -49,14 +46,20 @@
         }
         .circle-blue { background: #0d6efd; }
         .circle-yellow { background: #ffc107; }
+
+        /* Tambahkan style jika Anda ingin Title Section terlihat*/
+        .title-section {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container-fluid">
-            <!-- Brand / Logo -->
             <a class="navbar-brand" href="#">
                 <i class="fas fa-coins me-2"></i>ok
             </a>
@@ -68,35 +71,39 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="ms-auto d-flex">
-                    <!-- Login/Logout -->
-
-                   <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="btn live-preview-drop fs-4 lh-sm btn-outline-primary rounded border-white border border-opacity-40 text-white d-flex align-items-center gap-2 px-3 py-2"
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn live-preview-drop fs-4 lh-sm btn-outline-primary rounded border-white border border-opacity-40 text-white d-flex align-items-center gap-2 px-3 py-2"
                                 type="submit">
-                                LOG OUT
-                            </button>
+                            LOG OUT
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="py-4">
         <div class="container">
 
-            <div class="container-fluid">
-    
-    @if(session('login'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('login') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+            @if(session('login'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('login') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            
+            <div class="title-section">Keuangan & Akuntansi</div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('bukubesar') }}">Buku Besar</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lihat Detail</li>
+                </ol>
+            </nav>
 
-    </div>
 
-            <!-- Hero Section -->
             <div class="hero mb-5">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -107,12 +114,10 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Finance Illustration" class="img-fluid">
                     </div>
                 </div>
-                <!-- Decorative Circles -->
                 <div class="circle circle-blue" style="width:80px;height:80px;top:-20px;right:-20px;"></div>
                 <div class="circle circle-yellow" style="width:60px;height:60px;bottom:-10px;left:10px;"></div>
             </div>
 
-            <!-- Feature Cards -->
             <div class="row g-4 mb-5">
                 <div class="col-md-4">
                     <div class="card feature-card shadow-sm h-100 text-center py-4">
@@ -137,7 +142,6 @@
                 </div>
             </div>
 
-            <!-- Banner -->
             <div class="p-5 rounded-4 text-center text-white mb-5"
                  style="background: linear-gradient(135deg, #0d6efd, #6610f2); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                 <h2 class="fw-bold">Kelola Keuangan dengan Mudah!</h2>
@@ -147,11 +151,9 @@
         </div>
     </main>
 
-    <!-- JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</body>
+    </body>
 </html>

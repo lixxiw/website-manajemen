@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('layouts/home'); // pastikan nama file Blade = dashboard.blade.php
+        return view('layouts/home');
     }
 }

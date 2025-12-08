@@ -289,28 +289,22 @@
 
                     <!-- FILTER -->
                     <div class="filter-card shadow-sm mb-4">
-                        <form action="{{ route('bukubesar.filter') }}" method="GET">
+                       <form action="{{ route('bukubesar.filter') }}" method="GET">
     <div class="row g-3">
         <div class="col-md-3">
             <label>Tanggal Awal :</label>
-            <input type="date" class="form-control" name="start" required>
+            <input type="date" class="form-control" name="start" id="startDate" required>
         </div>
 
         <div class="col-md-3">
             <label>Tanggal Akhir :</label>
-            <input type="date" class="form-control" name="end" required>
+            <input type="date" class="form-control" name="end" id="endDate" required>
         </div>
 
         <div class="col-md-6 d-flex align-items-end gap-3">
             <button class="btn btn-primary" type="submit">Tampilkan</button>
-
-            <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">
-                Export Excel
-            </a>
-
-            <button class="btn btn-success text-white" id="printBtn">
-                Print
-            </button>
+            <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">Export Excel</a>
+            <button class="btn btn-success text-white" id="printBtn">Print</button>
         </div>
     </div>
 </form>
@@ -370,33 +364,7 @@
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const btnTampilkan = document.getElementById('filterBtn');
-    const startInput = document.getElementById('startDate');
-    const endInput = document.getElementById('endDate');
-    const titleBuku = document.querySelector('h4.section-title');
-    const rows = document.querySelectorAll('table.table-bordered tbody tr');
-
-    btnTampilkan.addEventListener('click', function() {
-        const start = startInput.value ? new Date(startInput.value) : null;
-        const end = endInput.value ? new Date(endInput.value) : null;
-
-        titleBuku.textContent =
-            `📘 Buku Besar | Tanggal Awal : ${startInput.value || '-'} , Tanggal Akhir : ${endInput.value || '-'}`;
-
-        rows.forEach(row => {
-            const dateCell = row.querySelector('td:first-child').innerText;
-            const [day, month, year] = dateCell.split('/');
-            const rowDate = new Date(`${year}-${month}-${day}`);
-
-            let show = true;
-
-            if (start && rowDate < start) show = false;
-            if (end && rowDate > end) show = false;
-
-            row.style.display = show ? '' : 'none';
-        });
-    });
-
+   
     // PRINT BUTTON FUNCTION
     document.getElementById('printBtn').addEventListener('click', function () {
         window.print();

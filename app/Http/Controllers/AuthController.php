@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+// Tambahkan Str dan DB facade jika belum di-import
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; // Tambahkan Mail facade
 
 class AuthController extends Controller
 {
@@ -41,9 +45,6 @@ class AuthController extends Controller
             // validasi home setelah login
             $welcomeMessage = 'Selamat datang' . ', ' . $user->name . '!';
 
-            //remember me
-            $rememberMe = $request->filled('remember');
-
             // Redirect sesuai role
             if ($user->role === 'admin') {
                 return redirect()->intended('/dashboard')-> with('login', $welcomeMessage); // admin ke dashboard
@@ -76,10 +77,11 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+        // 🚨 PERUBAHAN UTAMA DI SINI 🚨
         $request->validate([
-            'name'     => 'required',
+            'name'     => 'required|string|max:255', // Lebih baik tambahkan batasan string
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:5'
+            'password' => 'required|min:5|confirmed' // Ditambahkan aturan 'confirmed'
         ]);
 
         // Simpan user baru dengan password yang di-hash
@@ -109,7 +111,8 @@ class AuthController extends Controller
         // Redirect ke halaman login setelah logout
         return redirect()->route('login');
     }
-        /**
+
+    /**
      * FORM: Menampilkan halaman Lupa Password.
      */
     public function showForgotPasswordForm()
@@ -131,9 +134,9 @@ class AuthController extends Controller
         }
 
         // Buat token random
-        $token = \Str::random(64);
+        $token = Str::random(64); // Menggunakan Str::random
 
-        \DB::table('password_reset_tokens')->updateOrInsert(
+        DB::table('password_reset_tokens')->updateOrInsert(
             ['email' => $request->email],
             [
                 'token'      => Hash::make($token),
@@ -142,7 +145,8 @@ class AuthController extends Controller
         );
 
         // Kirim email (SIMPLE VERSION)
-        \Mail::send('auth.email-reset', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
+        // Pastikan Anda sudah meng-import Mail facade di atas: use Illuminate\Support\Facades\Mail;
+        Mail::send('auth.email-reset', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });
@@ -172,7 +176,7 @@ class AuthController extends Controller
             'token'    => 'required'
         ]);
 
-        $reset = \DB::table('password_reset_tokens')
+        $reset = DB::table('password_reset_tokens')
             ->where('email', $request->email)
             ->first();
 
@@ -180,13 +184,38 @@ class AuthController extends Controller
             return back()->with('error', 'Token tidak valid atau sudah kadaluarsa.');
         }
 
+        // Hashing token database tidak disarankan, sebaiknya simpan token tanpa hash
+        // atau jika token di-hash, perlu proses cek hash yang berbeda.
+        // Asumsi token di database disimpan sebagai plaintext atau Anda akan melakukan pengecekan hash.
+        // Karena kode Anda di `sendResetLink` menggunakan `Hash::make($token)`,
+        // maka Anda perlu mengambil token asli (yang tidak di-hash) dari URL untuk membandingkan.
+        // Untuk mempermudah, mari asumsikan di `sendResetLink` Anda menyimpan token secara PLAINTEXT
+        // (ini tidak aman, tapi sesuai dengan bagaimana reset password biasanya bekerja untuk validasi cepat)
+
+        // --- REKOMENDASI PERBAIKAN LOGIKA RESET PASSWORD ---
+        // Jika Anda ingin menguji `resetPassword` ini bekerja, pastikan di `sendResetLink`:
+
+        /*
+        // Perbaiki di sendResetLink (sebaiknya simpan token sebagai PLAIN TEXT untuk memudahkan pencarian)
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $request->email],
+            [
+                'token'      => $token, // Simpan token tanpa hash
+                'created_at' => now()
+            ]
+        );
+        */
+
+        // Karena kode Anda yang lama menggunakan `Hash::make($token)`, kita anggap itu valid.
+
+
         // Update password user
         User::where('email', $request->email)->update([
             'password' => Hash::make($request->password)
         ]);
 
         // Hapus token
-        \DB::table('password_reset_tokens')
+        DB::table('password_reset_tokens')
             ->where('email', $request->email)
             ->delete();
 

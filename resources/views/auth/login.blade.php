@@ -6,9 +6,9 @@
     <title>Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="{{ asset('assets/login.css') }}">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -30,7 +30,7 @@
             transform: translateY(-1rem) scale(0.8);
             background-color: white;
             padding: 0 0.25rem;
-            z-index: 11; 
+            z-index: 11;
         }
         .h-custom {
             height: calc(100% - 73px);
@@ -42,7 +42,7 @@
             height: 1px;
             background: #eee;
         }
-        
+
         /* Modifikasi untuk layout form-outline dan password-toggle */
         .form-outline.password-container {
             position: relative;
@@ -53,18 +53,18 @@
             cursor: pointer;
             position: absolute;
             /* Posisikan ikon di kanan input, menyesuaikan dengan padding */
-            right: 0.75rem; 
+            right: 0.75rem;
             top: 50%;
             /* Trik untuk menengahkan vertikal tanpa mempedulikan tinggi input */
-            transform: translateY(-50%); 
-            padding: 0; 
-            z-index: 5; 
+            transform: translateY(-50%);
+            padding: 0;
+            z-index: 5;
             color: #6c757d;
         }
 
         /* PERBAIKAN: Memberi ruang di kanan input agar teks tidak tertutup ikon */
         .password-container .form-control {
-            padding-right: 2.5rem !important; 
+            padding-right: 2.5rem !important;
         }
     </style>
 </head>
@@ -87,16 +87,16 @@
                     @endif
 
                     <form method="POST" action="{{ route('login') }}">
-                        @csrf 
+                        @csrf
 
                         {{-- ALERT BOX for Login Error --}}
                         @if ($errors->has('email'))
                             <div class="alert alert-danger" role="alert">
-                                <strong>Login Failed:</strong> {{ $errors->first('email') }} 
+                                <strong>Login Failed:</strong> {{ $errors->first('email') }}
                             </div>
                         @elseif (session('status'))
                             <div class="alert alert-danger" role="alert">
-                                <strong>Error:</strong> {{ session('status') }} 
+                                <strong>Error:</strong> {{ session('status') }}
                             </div>
                         @endif
                         {{-- END ALERT BOX --}}
@@ -120,9 +120,9 @@
 
                         <div class="form-outline mb-4">
                             <h5>EMAIL:</h5>
-                            <input 
-                                type="email" 
-                                id="emailInput" 
+                            <input
+                                type="email"
+                                id="emailInput"
                                 name="email"
                                 class="form-control form-control-lg"
                                 placeholder="Enter a valid email address"
@@ -133,41 +133,41 @@
 
                         <div class="form-outline mb-3 password-container">
                             <h5>Password:</h5>
-                            <input 
-                                type="password" 
-                                id="passwordInput" 
+                            <input
+                                type="password"
+                                id="passwordInput"
                                 name="password"
                                 class="form-control form-control-lg"
                                 placeholder="Enter password"
                                 required
                             />
                             <span class="password-toggle" id="password-toggle-icon">
-                                <i class="fas fa-eye"></i> 
+                                <i class="fas fa-eye"></i>
                             </span>
                             <label class="form-label" for="passwordInput"></label>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="form-check mb-0">
-                                <input 
-                                    class="form-check-input me-2" 
-                                    type="checkbox" 
+                                <input
+                                    class="form-check-input me-2"
+                                    type="checkbox"
                                     name="remember"
                                     id="remember_me"
-                                    required 
+                                    required
                                 />
                                 <label class="form-check-label" for="remember">
                                     Remember me
                                 </label>
                             </div>
-                            <a href="#" class="text-body">Forgot password?</a>
+                            <a href="{{ route('password.request') }}" class="text-body">Forgot password?</a>
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">
-                                Don't have an account? 
+                                Don't have an account?
                                 <a href="{{ route('register') }}" class="link-danger">Register</a>
                             </p>
                         </div>
@@ -176,7 +176,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
             <div class="text-white mb-3 mb-md-0">
                 Copyright © 2020. All rights reserved.
@@ -200,7 +200,7 @@
             toggleIcon.addEventListener('click', function() {
                 // Periksa tipe input saat ini
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                
+
                 // Ubah tipe input
                 passwordInput.setAttribute('type', type);
 

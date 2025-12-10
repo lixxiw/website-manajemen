@@ -291,14 +291,28 @@
                     <div class="filter-card shadow-sm mb-4">
                        <form action="{{ route('bukubesar.filter') }}" method="GET">
     <div class="row g-3">
+
+        <div class="col-md-4">
+            <label>Pilih Akun (COA) :</label>
+            <select name="id_coa" class="form-control" required>
+                <option value="">-- Pilih Akun --</option>
+                @foreach($coa as $c)
+                    <option value="{{ $c->id_coa }}"
+                        {{ isset($id_coa) && $id_coa == $c->id_coa ? 'selected' : '' }}>
+                        {{ $c->coa_number }} - {{ $c->coa_name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="col-md-3">
             <label>Tanggal Awal :</label>
-            <input type="date" class="form-control" name="start" id="startDate" required>
+            <input type="date" class="form-control" name="start" value="{{ $start }}" required>
         </div>
 
         <div class="col-md-3">
             <label>Tanggal Akhir :</label>
-            <input type="date" class="form-control" name="end" id="endDate" required>
+            <input type="date" class="form-control" name="end" value="{{ $end }}" required>
         </div>
 
         <div class="col-md-6 d-flex align-items-end gap-3">
@@ -324,25 +338,29 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover text-center mb-0">
                                 <thead>
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Saldo Awal</th>
-                                        <th>Debit</th>
-                                        <th>Kredit</th>
-                                        <th>Saldo Akhir</th>
-                                    </tr>
-                                </thead>
+    <tr>
+        <th>Akun</th>
+        <th>Nomor Akun</th>
+        <th>Saldo Awal</th>
+        <th>Debit</th>
+        <th>Kredit</th>
+        <th>Saldo Akhir</th>
+    </tr>
+</thead>
+
                                 <tbody>
-                                    @foreach($bukbes as $b)
-                                    <tr>
-                                        <td>{{ \Carbon\Carbon::parse($b->tanggal)->format('d/m/Y') }}</td>
-                                        <td>{{ number_format($b->saldo_awal ?? 0, 0, ',', '.') }}</td>
-                                        <td>{{ number_format($b->debit ?? 0, 0, ',', '.') }}</td>
-                                        <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>
-                                        <td>{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+@foreach($bukbes as $b)
+<tr>
+    <td>{{ $b->coa->coa_name ?? '-' }}</td>
+    <td>{{ $b->coa->coa_number ?? '-' }}</td>
+    <td>{{ number_format($b->saldo_awal ?? 0, 0, ',', '.') }}</td>
+    <td>{{ number_format($b->debit ?? 0, 0, ',', '.') }}</td>
+    <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>
+    <td>{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
+</tr>
+@endforeach
+</tbody>
+
                             </table>
                         </div>
                     </div>
@@ -364,7 +382,7 @@
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-   
+
     // PRINT BUTTON FUNCTION
     document.getElementById('printBtn').addEventListener('click', function () {
         window.print();

@@ -9,10 +9,9 @@ class Bukbes extends Model
 {
     use HasFactory;
 
-    // Nama tabel di database
     protected $table = 'bukbes';
+    protected $primaryKey = 'id';
 
-    // Field yang bisa diisi secara massal
     protected $fillable = [
         'tanggal',
         'id_coa',
@@ -22,4 +21,10 @@ class Bukbes extends Model
         'saldo_akhir',
         'deleted',
     ];
+
+    // Relasi ke COA (yang benar)
+    public function coa()
+    {
+        return $this->belongsTo(Coa::class, 'id_coa', 'id_coa');
+    }
 }

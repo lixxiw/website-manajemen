@@ -54,7 +54,7 @@ return new class extends Migration
             ['tanggal'=>'2025-01-05','id_coa'=>22,'saldo_awal'=>4939489916,'debit'=>0,'kredit'=>0,'saldo_akhir'=>4939489916,'deleted'=>0,'created_at'=>now(),'updated_at'=>now()],
             ['tanggal'=>'2025-01-05','id_coa'=>171,'saldo_awal'=>0,'debit'=>0,'kredit'=>0,'saldo_akhir'=>0,'deleted'=>0,'created_at'=>now(),'updated_at'=>now()],
             ['tanggal'=>'2025-01-05','id_coa'=>24,'saldo_awal'=>0,'debit'=>0,'kredit'=>0,'saldo_akhir'=>0,'deleted'=>0,'created_at'=>now(),'updated_at'=>now()],
-            ['tanggal'=>'2025-01-05','id_coa'=>25,'saldo_awal'=>14688223,'debit'=>0,'kredit'=>0,'saldo_akhir'=>14688223,'deleted'=>0,'created_at'=>now(),'updated_at'=>now()],
+            ['tanggal'=>'2025-01-05','id_coa'=>98,'saldo_awal'=>0,'debit'=>46834000,'kredit'=>0,'saldo_akhir'=>46834000,'deleted'=>0,'created_at'=>now(),'updated_at'=>now()],
         ]);
     }
 

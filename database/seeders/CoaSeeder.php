@@ -31,7 +31,7 @@ class CoaSeeder extends Seeder
             ['id_coa'=>168,'coa_name'=>'Piutang Direksi','coa_number'=>'1.1.03.03','posisi_awal'=>'Debit'],
             ['id_coa'=>169,'coa_name'=>'Piutang Uang Jalan','coa_number'=>'1.1.03.04','posisi_awal'=>'Debit'],
             ['id_coa'=>170,'coa_name'=>'Piutang Lain-lain','coa_number'=>'1.1.03.05','posisi_awal'=>'Debit'],
-            ['id_coa'=>98,'coa_name'=>'Nama COA Baru','coa_number'=>'1.x.xx','posisi_awal'=>'Debit'],
+            ['id_coa'=>98,'coa_name'=>'HPP - Uang Jalan & Totalan','coa_number'=>'5.1.01.01','posisi_awal'=>'Debit'],
 
         ]);
     }

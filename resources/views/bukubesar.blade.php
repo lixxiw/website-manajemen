@@ -289,18 +289,7 @@
                         <form action="{{ route('bukubesar.filter') }}" method="GET" id="filterForm">
                             <div class="row g-3">
 
-                                <div class="col-md-4">
-                                    <label>Pilih Akun (COA) :</label>
-                                    <select name="id_coa" class="form-control" required>
-                                        <option value="">-- Pilih Akun --</option>
-                                        @foreach($coa as $c)
-                                            <option value="{{ $c->id_coa }}"
-                                                {{ isset($id_coa) && $id_coa == $c->id_coa ? 'selected' : '' }}>
-                                                {{ $c->coa_number }} - {{ $c->coa_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <input type="hidden" name="id_coa" value="all">
 
                                 <div class="col-md-3">
                                     <label>Tanggal Awal :</label>
@@ -334,8 +323,8 @@
                             <table class="table table-bordered table-hover text-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Akun</th>
                                         <th>Nomor Akun</th>
+                                        <th>Akun</th>
                                         <th>Saldo Awal</th>
                                         <th>Debit</th>
                                         <th>Kredit</th>
@@ -345,9 +334,13 @@
 
                                 <tbody>
                                     @foreach($bukbes as $b)
+                                    {{-- SKIP jika COA tidak ditemukan --}}
+    @if(!$b->coa)
+        @continue
+    @endif
                                     <tr>
-                                        <td>{{ $b->coa->coa_name ?? '-' }}</td>
-                                        <td>{{ $b->coa->coa_number ?? '-' }}</td>
+                                        <td>{{ $b->coa->coa_number }}</td>
+                                        <td>{{ $b->coa->coa_name }}</td>
                                         <td>{{ number_format($b->saldo_awal ?? 0, 0, ',', '.') }}</td>
                                         <td>{{ number_format($b->debit ?? 0, 0, ',', '.') }}</td>
                                         <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>

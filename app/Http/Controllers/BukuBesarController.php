@@ -42,19 +42,56 @@ public function filter(Request $request)
     $end   = $request->end;
     $id_coa = $request->id_coa;
 
-    // 1. SALDO AWAL
+    // Jika all → ambil semua data
+    if ($id_coa === "all") {
+
+        $data = Bukbes::whereBetween('tanggal', [$start, $end])
+                      ->orderBy('id_coa')
+                      ->orderBy('tanggal')
+                      ->get();
+
+        // Hitung saldo per COA masing-masing
+        $grouped = $data->groupBy('id_coa');
+
+        foreach ($grouped as $coa_id => $items) {
+
+            $saldoAwal = Bukbes::where('id_coa', $coa_id)
+                               ->where('tanggal', '<', $start)
+                               ->orderBy('tanggal', 'desc')
+                               ->value('saldo_akhir') ?? 0;
+
+            $saldo = $saldoAwal;
+
+            foreach ($items as $item) {
+                $item->saldo_awal = $saldo;
+                $saldo = $saldo + ($item->debit ?? 0) - ($item->kredit ?? 0);
+                $item->saldo_akhir = $saldo;
+            }
+        }
+
+        return view('bukubesar', [
+            'bukbes' => $data,
+            'start' => $start,
+            'end'   => $end,
+            'saldo_awal' => 0, // tidak relevan untuk all
+            'coa' => Coa::orderBy('coa_number')->get(),
+            'id_coa' => "all"
+        ]);
+    }
+
+    // ===================
+    // MODE SINGLE COA
+    // ===================
     $saldoAwal = Bukbes::where('id_coa', $id_coa)
                        ->where('tanggal', '<', $start)
                        ->orderBy('tanggal', 'desc')
                        ->value('saldo_akhir') ?? 0;
 
-    // 2. DATA RANGE
     $data = Bukbes::where('id_coa', $id_coa)
                   ->whereBetween('tanggal', [$start, $end])
                   ->orderBy('tanggal')
                   ->get();
 
-    // 3. HITUNG SALDO
     $saldo = $saldoAwal;
     foreach ($data as $item) {
         $item->saldo_awal = $saldo;

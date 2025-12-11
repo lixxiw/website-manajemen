@@ -205,7 +205,6 @@
         data-sidebartype="full" data-sidebar-position="fixed"
         data-header-position="fixed">
 
-        <!-- SIDEBAR -->
         <aside class="left-sidebar">
             <div class="p-3">
 
@@ -259,8 +258,8 @@
                             </a>
 
                             <form id="logout-form"
-                                  action="{{ route('logout') }}"
-                                  method="POST" class="d-none">
+                                action="{{ route('logout') }}"
+                                method="POST" class="d-none">
                                 @csrf
                             </form>
                         </li>
@@ -271,7 +270,6 @@
             </div>
         </aside>
 
-        <!-- BODY CONTENT -->
         <div class="body-wrapper">
 
             <div class="container-fluid">
@@ -287,79 +285,76 @@
                         </nav>
                     </div>
 
-                    <!-- FILTER -->
                     <div class="filter-card shadow-sm mb-4">
-                       <form action="{{ route('bukubesar.filter') }}" method="GET">
-    <div class="row g-3">
+                        <form action="{{ route('bukubesar.filter') }}" method="GET" id="filterForm">
+                            <div class="row g-3">
 
-        <div class="col-md-4">
-            <label>Pilih Akun (COA) :</label>
-            <select name="id_coa" class="form-control" required>
-                <option value="">-- Pilih Akun --</option>
-                @foreach($coa as $c)
-                    <option value="{{ $c->id_coa }}"
-                        {{ isset($id_coa) && $id_coa == $c->id_coa ? 'selected' : '' }}>
-                        {{ $c->coa_number }} - {{ $c->coa_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+                                <div class="col-md-4">
+                                    <label>Pilih Akun (COA) :</label>
+                                    <select name="id_coa" class="form-control" required>
+                                        <option value="">-- Pilih Akun --</option>
+                                        @foreach($coa as $c)
+                                            <option value="{{ $c->id_coa }}"
+                                                {{ isset($id_coa) && $id_coa == $c->id_coa ? 'selected' : '' }}>
+                                                {{ $c->coa_number }} - {{ $c->coa_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-        <div class="col-md-3">
-            <label>Tanggal Awal :</label>
-            <input type="date" class="form-control" name="start" value="{{ $start }}" required>
-        </div>
+                                <div class="col-md-3">
+                                    <label>Tanggal Awal :</label>
+                                    <input type="date" class="form-control" name="start" value="{{ $start }}" required id="startDate">
+                                </div>
 
-        <div class="col-md-3">
-            <label>Tanggal Akhir :</label>
-            <input type="date" class="form-control" name="end" value="{{ $end }}" required>
-        </div>
+                                <div class="col-md-3">
+                                    <label>Tanggal Akhir :</label>
+                                    <input type="date" class="form-control" name="end" value="{{ $end }}" required id="endDate">
+                                </div>
 
-        <div class="col-md-6 d-flex align-items-end gap-3">
-            <button class="btn btn-primary" type="submit">Tampilkan</button>
-            <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">Export Excel</a>
-            <button class="btn btn-success text-white" id="printBtn">Print</button>
-        </div>
-    </div>
-</form>
+                                <div class="col-md-6 d-flex align-items-end gap-3">
+                                    <button class="btn btn-primary" type="submit">Tampilkan</button>
+                                    <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">Export Excel</a>
+                                    <button class="btn btn-success text-white" id="printBtn">Print</button>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
 
-                    <!-- TITLE -->
                     <h4 class="section-title">
-    📘 Buku Besar | Tanggal Awal: {{ $start ?? '-' }} ,
-    Tanggal Akhir: {{ $end ?? '-' }} |
-    Saldo Awal: {{ number_format($saldo_awal ?? 0,0,',','.') }}
-</h4>
+                        📘 Buku Besar | Tanggal Awal: {{ $start ?? '-' }} ,
+                        Tanggal Akhir: {{ $end ?? '-' }} |
+                        Saldo Awal: {{ number_format($saldo_awal ?? 0,0,',','.') }}
+                    </h4>
 
 
-                    <!-- TABLE -->
                     <div class="table-container shadow-sm">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover text-center mb-0">
                                 <thead>
-    <tr>
-        <th>Akun</th>
-        <th>Nomor Akun</th>
-        <th>Saldo Awal</th>
-        <th>Debit</th>
-        <th>Kredit</th>
-        <th>Saldo Akhir</th>
-    </tr>
-</thead>
+                                    <tr>
+                                        <th>Akun</th>
+                                        <th>Nomor Akun</th>
+                                        <th>Saldo Awal</th>
+                                        <th>Debit</th>
+                                        <th>Kredit</th>
+                                        <th>Saldo Akhir</th>
+                                    </tr>
+                                </thead>
 
                                 <tbody>
-@foreach($bukbes as $b)
-<tr>
-    <td>{{ $b->coa->coa_name ?? '-' }}</td>
-    <td>{{ $b->coa->coa_number ?? '-' }}</td>
-    <td>{{ number_format($b->saldo_awal ?? 0, 0, ',', '.') }}</td>
-    <td>{{ number_format($b->debit ?? 0, 0, ',', '.') }}</td>
-    <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>
-    <td>{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
-</tr>
-@endforeach
-</tbody>
+                                    @foreach($bukbes as $b)
+                                    <tr>
+                                        <td>{{ $b->coa->coa_name ?? '-' }}</td>
+                                        <td>{{ $b->coa->coa_number ?? '-' }}</td>
+                                        <td>{{ number_format($b->saldo_awal ?? 0, 0, ',', '.') }}</td>
+                                        <td>{{ number_format($b->debit ?? 0, 0, ',', '.') }}</td>
+                                        <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>
+                                        <td>{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
 
                             </table>
                         </div>
@@ -381,13 +376,38 @@
     <script src="../assets/js/dashboard.js"></script>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 
-    // PRINT BUTTON FUNCTION
-    document.getElementById('printBtn').addEventListener('click', function () {
-        window.print();
-    });
-});
+            // PRINT BUTTON FUNCTION
+            document.getElementById('printBtn').addEventListener('click', function (e) {
+                e.preventDefault(); // Mencegah submit jika button ini ada di dalam form
+                window.print();
+            });
+
+            // --- VALIDASI TANGGAL ---
+            const formFilter = document.getElementById('filterForm');
+            const inputStart = document.getElementById('startDate');
+            const inputEnd = document.getElementById('endDate');
+
+            if (formFilter && inputStart && inputEnd) {
+                formFilter.addEventListener('submit', function(e) {
+                    const startDate = new Date(inputStart.value);
+                    const endDate = new Date(inputEnd.value);
+
+                    // Membandingkan tanggal (startDate > endDate)
+                    if (startDate > endDate) {
+                        // Mencegah pengiriman form
+                        e.preventDefault();
+
+                        // Tampilkan notifikasi alert
+                        alert('🛑 Peringatan! Tanggal Awal tidak boleh lebih dari Tanggal Akhir. Silakan periksa kembali.');
+
+                        // Opsional: berikan fokus ke input tanggal awal yang salah
+                        inputStart.focus();
+                    }
+                });
+            }
+        });
     </script>
 
 </body>

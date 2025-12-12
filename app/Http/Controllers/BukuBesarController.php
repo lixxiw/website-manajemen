@@ -32,15 +32,25 @@ class BukuBesarController extends Controller
 
    public function index()
 {
+    if (auth()->user()->role !== 'admin') {
+        return redirect()->route('home')->with('error', 'Tidak bisa akses.');
+    }
     return view('bukubesar', [
         'coa' => Coa::orderBy('coa_number')->get(),
-        'bukbes' => [], // kosong dulu
+        'bukbes' => [],
         'start' => null,
         'end' => null,
         'saldo_awal' => 0,
-        'id_coa' => null
+        'id_coa' => null,
+
+        // ⬇⬇ TAMBAHKAN INI SUPAYA VIEW TIDAK ERROR
+        'total_saldo_awal' => 0,
+        'total_debit' => 0,
+        'total_kredit' => 0,
+        'total_saldo_akhir' => 0,
     ]);
 }
+
 
 
 public function filter(Request $request)

@@ -303,10 +303,10 @@
 
                                 <div class="col-md-6 d-flex align-items-end gap-3">
                                     <button class="btn btn-primary" type="submit">Tampilkan</button>
-<a href="{{ route('bukubesar.export', ['start' => $start, 'end' => $end]) }}"
-   class="btn btn-info text-white">
-   Export Excel
-</a>
+                                    <a href="{{ route('bukubesar.export', ['start' => $start, 'end' => $end]) }}"
+                                         class="btn btn-info text-white">
+                                         Export Excel
+                                    </a>
 
 
 

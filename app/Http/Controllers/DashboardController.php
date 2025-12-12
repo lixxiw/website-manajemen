@@ -7,7 +7,18 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        return view('dashboard'); // pastikan nama file Blade = dashboard.blade.php
+{
+    // Jika belum login
+    if (!auth()->check()) {
+        return redirect()->route('login');
     }
+
+    // Jika bukan admin
+    if (auth()->user()->role !== 'admin') {
+        return redirect()->route('home')->with('error', 'Anda tidak punya akses ke dashboard admin.');
+    }
+
+    return view('dashboard');
+}
+
 }

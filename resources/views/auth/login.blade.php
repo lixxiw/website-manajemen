@@ -128,6 +128,7 @@
     placeholder="Enter a valid email address"
     required
     autofocus
+    pattern="[a-zA-Z0-9._%+-]{3,30}@gmail\.com"
 />
 
                             <label class="form-label" for="emailInput"></label>

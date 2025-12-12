@@ -30,9 +30,14 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+    'email' => [
+        'required',
+        'email',
+        'regex:/^[a-zA-Z0-9._%+-]{3,30}@gmail\.com$/'
+    ],
+    'password' => 'required'
+]);
+
 
         $credentials = $request->only('email', 'password');
 
@@ -78,11 +83,19 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // 🚨 PERUBAHAN UTAMA DI SINI 🚨
-        $request->validate([
-            'name'     => 'required|string|max:255', // Lebih baik tambahkan batasan string
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:5|confirmed' // Ditambahkan aturan 'confirmed'
-        ]);
+       $request->validate([
+    'name'     => 'required|string|max:50',
+
+    'email'    => [
+        'required',
+        'email',
+        'unique:users,email',
+        'regex:/^[a-zA-Z0-9._%+-]{3,30}@gmail\.com$/'
+    ],
+
+    'password' => 'required|min:5|confirmed'
+]);
+
 
         // Simpan user baru dengan password yang di-hash
         User::create([
@@ -125,7 +138,14 @@ class AuthController extends Controller
      */
     public function sendResetLink(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate([
+    'email' => [
+        'required',
+        'email',
+        'regex:/^[a-zA-Z0-9._%+-]{3,30}@gmail\.com$/'
+    ]
+]);
+
 
         $user = User::where('email', $request->email)->first();
 

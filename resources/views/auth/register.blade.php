@@ -90,13 +90,15 @@
                                         <i class="fas fa-user fa-lg me-3 fa-fw pt-4"></i>
                                         <div class="form-group flex-fill mb-0">
                                             <label class="form-label" for="form3Example1c">Your Name</label>
-                                            <input
+                                           <input
     type="text"
     name="name"
     class="form-control"
     required
     autofocus
+    placeholder="enter your name"
 >
+
 
                                         </div>
                                     </div>
@@ -105,7 +107,16 @@
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw pt-4"></i>
                                         <div class="form-group flex-fill mb-0">
                                             <label class="form-label" for="form3Example3c">Your Email</label>
-                                            <input type="email" id="form3Example3c" class="form-control" name="email" required value="{{ old('email') }}" />
+<input
+    type="email"
+    id="form3Example3c"
+    name="email"
+    class="form-control form-control-lg"
+    placeholder="Enter a valid email address"
+    required
+    autofocus
+    pattern="[a-zA-Z0-9._%+-]{3,30}@gmail\.com"
+/>
                                         </div>
                                     </div>
 
@@ -113,7 +124,14 @@
                                         <i class="fas fa-lock fa-lg me-3 fa-fw pt-4"></i>
                                         <div class="form-group flex-fill mb-0 password-input-container">
                                             <label class="form-label" for="form3Example4c">Password</label>
-                                            <input type="password" id="form3Example4c" class="form-control" name="password" required />
+<input
+    type="password"
+    id="form3Example4c"
+    class="form-control"
+    name="password"
+    required
+    placeholder="Enter your password"
+>
                                             <span class="password-toggle" data-target="form3Example4c">
                                                 <i class="fas fa-eye"></i>
                                             </span>
@@ -124,7 +142,14 @@
                                         <i class="fas fa-key fa-lg me-3 fa-fw pt-4"></i>
                                         <div class="form-group flex-fill mb-0 password-input-container">
                                             <label class="form-label" for="form3Example4cd">Repeat your password</label>
-                                            <input type="password" id="form3Example4cd" class="form-control" name="password_confirmation" required />
+<input
+    type="password"
+    id="form3Example4cd"
+    class="form-control"
+    name="password_confirmation"
+    required
+    placeholder="repeat your password"
+>
                                             <span class="password-toggle" data-target="form3Example4cd">
                                                 <i class="fas fa-eye"></i>
                                             </span>

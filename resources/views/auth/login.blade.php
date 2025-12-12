@@ -121,13 +121,15 @@
                         <div class="form-outline mb-4">
                             <h5>EMAIL:</h5>
                             <input
-                                type="email"
-                                id="emailInput"
-                                name="email"
-                                class="form-control form-control-lg"
-                                placeholder="Enter a valid email address"
-                                required
-                            />
+    type="email"
+    id="emailInput"
+    name="email"
+    class="form-control form-control-lg"
+    placeholder="Enter a valid email address"
+    required
+    autofocus
+/>
+
                             <label class="form-label" for="emailInput"></label>
                         </div>
 
@@ -193,6 +195,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        document.getElementById('emailInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('passwordInput').focus();
+    }
+});
+
         document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('passwordInput');
             const toggleIcon = document.getElementById('password-toggle-icon');

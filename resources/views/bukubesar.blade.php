@@ -303,7 +303,13 @@
 
                                 <div class="col-md-6 d-flex align-items-end gap-3">
                                     <button class="btn btn-primary" type="submit">Tampilkan</button>
-                                    <a href="{{ route('bukubesar.export') }}" class="btn btn-info text-white">Export Excel</a>
+<a href="{{ route('bukubesar.export', ['start' => $start, 'end' => $end]) }}"
+   class="btn btn-info text-white">
+   Export Excel
+</a>
+
+
+
                                     <button class="btn btn-success text-white" id="printBtn">Print</button>
                                 </div>
                             </div>
@@ -346,7 +352,17 @@
                                         <td>{{ number_format($b->kredit ?? 0, 0, ',', '.') }}</td>
                                         <td>{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
                                     </tr>
+
+
                                     @endforeach
+                                    {{-- ROW TOTAL DI SINI --}}
+<tr style="font-weight:bold; background:#d8e8ff;">
+    <td colspan="2" class="text-center">TOTAL</td>
+    <td>{{ number_format($total_saldo_awal) }}</td>
+    <td>{{ number_format($total_debit) }}</td>
+    <td>{{ number_format($total_kredit) }}</td>
+    <td>{{ number_format($total_saldo_akhir) }}</td>
+</tr>
                                 </tbody>
 
                             </table>

@@ -12,10 +12,17 @@ use Illuminate\Http\Request;
 class BukuBesarController extends Controller
 {
 
-    public function exportExcel()
-    {
-        return Excel::download(new BukbesExport, 'bukubesar.xlsx');
-    }
+ public function exportExcel(Request $request)
+{
+    return Excel::download(
+        new BukbesExport($request->start, $request->end, $request->id_coa),
+        'bukubesar.xlsx'
+    );
+}
+
+
+
+
 
     public function detail()
     {
@@ -68,15 +75,24 @@ public function filter(Request $request)
                 $item->saldo_akhir = $saldo;
             }
         }
+// ⬇⬇ MASUKKAN INI SETELAH LOOP SELESAI
+$total_saldo_awal   = $data->sum('saldo_awal');
+$total_debit        = $data->sum('debit');
+$total_kredit       = $data->sum('kredit');
+$total_saldo_akhir  = $data->sum('saldo_akhir');
 
-        return view('bukubesar', [
-            'bukbes' => $data,
-            'start' => $start,
-            'end'   => $end,
-            'saldo_awal' => 0, // tidak relevan untuk all
-            'coa' => Coa::orderBy('coa_number')->get(),
-            'id_coa' => "all"
-        ]);
+return view('bukubesar', [
+    'bukbes' => $data,
+    'start' => $start,
+    'end'   => $end,
+    'saldo_awal' => 0,
+    'coa' => Coa::orderBy('coa_number')->get(),
+    'id_coa' => "all",
+    'total_saldo_awal' => $total_saldo_awal,
+    'total_debit' => $total_debit,
+    'total_kredit' => $total_kredit,
+    'total_saldo_akhir' => $total_saldo_akhir,
+]);
     }
 
     // ===================
@@ -99,14 +115,24 @@ public function filter(Request $request)
         $item->saldo_akhir = $saldo;
     }
 
-    return view('bukubesar', [
-        'bukbes' => $data,
-        'start' => $start,
-        'end'   => $end,
-        'saldo_awal' => $saldoAwal,
-        'coa' => Coa::orderBy('coa_number')->get(),
-        'id_coa' => $id_coa
-    ]);
+   // ⬇⬇ TAMBAHKAN TOTAL DI SINI
+$total_saldo_awal   = $data->sum('saldo_awal');
+$total_debit        = $data->sum('debit');
+$total_kredit       = $data->sum('kredit');
+$total_saldo_akhir  = $data->sum('saldo_akhir');
+
+return view('bukubesar', [
+    'bukbes' => $data,
+    'start' => $start,
+    'end'   => $end,
+    'saldo_awal' => $saldoAwal,
+    'coa' => Coa::orderBy('coa_number')->get(),
+    'id_coa' => $id_coa,
+    'total_saldo_awal' => $total_saldo_awal,
+    'total_debit' => $total_debit,
+    'total_kredit' => $total_kredit,
+    'total_saldo_akhir' => $total_saldo_akhir,
+]);
 }
 
 

@@ -36,7 +36,6 @@
         }
 
         .container-fluid {
-            /* Pastikan container-fluid tidak mengganggu layout utama */
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
@@ -131,7 +130,6 @@
             font-size: 14px;
         }
         
-        /* Style untuk section title */
         .title-section {
             font-size: 1.5rem;
             font-weight: bold;
@@ -171,6 +169,13 @@
                             <a class="sidebar-link" href="{{ route('bukubesar') }}" aria-expanded="false">
                                 <i class="ti ti-notebook"></i>
                                 <span class="hide-menu">Buku Besar</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('neraca') }}" aria-expanded="false">
+                                <i class="ti ti-file-analytics"></i>
+                                <span class="hide-menu">Neraca</span>
                             </a>
                         </li>
 
@@ -221,15 +226,12 @@
                     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-4">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('bukubesar') }}">Buku Besar</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Lihat Detail</li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                     
                     <div class="row">
-                        </div>
-
+                         </div>
 
                 </div>
             </div>
@@ -245,5 +247,4 @@
     <script src="../assets/js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
-
 </html>

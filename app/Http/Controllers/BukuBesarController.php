@@ -20,10 +20,6 @@ class BukuBesarController extends Controller
     );
 }
 
-
-
-
-
     public function detail()
     {
         $bukbes = Bukbes::orderBy('tanggal')->get();

@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\NeracaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +63,7 @@ Route::middleware(['auth'])->group(function() {
     })->name('aruskas');
 
     Route::get('/balance', [DashboardController::class, 'index'])->name('balance');
+
+    Route::get('/neraca', [NeracaController::class, 'index'])->name('neraca');
 
 });

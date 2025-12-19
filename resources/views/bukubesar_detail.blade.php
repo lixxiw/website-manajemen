@@ -198,7 +198,7 @@
     <script src="../assets/js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const btnTampilkan = document.getElementById('filterBtn');
     const startInput = document.getElementById('startDate');
     const endInput = document.getElementById('endDate');

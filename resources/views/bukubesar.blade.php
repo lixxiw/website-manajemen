@@ -161,6 +161,39 @@
             color: #2a3547;
         }
 
+        /* ===== SCROLL KHUSUS TABEL ===== */
+.table-scroll-wrapper {
+    max-height: 600px; /* atur tinggi tabel */
+    overflow-y: auto;
+}
+
+/* Header tabel tetap */
+.table-scroll-wrapper thead th {
+    position: sticky;
+    top: 0;
+    background: #f4f6fa;
+    z-index: 2;
+}
+
+/* TOTAL tetap di bawah */
+.table-scroll-wrapper tfoot td {
+    position: sticky;
+    bottom: 0;
+    background: #f4f6fa;
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* Biar scroll halus */
+.table-scroll-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+
         @media print {
             .left-sidebar, .filter-card, .breadcrumb, .sidebar-bottom { display: none !important; }
             .body-wrapper { margin: 0 !important; width: 100% !important; padding: 0 !important; }
@@ -228,33 +261,59 @@
                     </div>
 
                     <div class="filter-card shadow-sm">
-                        <form action="{{ route('bukubesar.filter') }}" method="GET">
-                            <div class="row g-3">
-                                <input type="hidden" name="id_coa" value="all">
-                                <div class="col-md-3">
-                                    <label class="fw-bold mb-1">Tanggal Awal :</label>
-                                    <input type="date" class="form-control" name="start" value="{{ $start }}" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="fw-bold mb-1">Tanggal Akhir :</label>
-                                    <input type="date" class="form-control" name="end" value="{{ $end }}" required>
-                                </div>
-                                <div class="col-md-6 d-flex align-items-end gap-2">
-                                    <button class="btn btn-primary" type="submit">Tampilkan</button>
-                                    <a href="{{ route('bukubesar.export', ['start' => $start, 'end' => $end]) }}" class="btn btn-info text-white">Export Excel</a>
-                                    <button class="btn btn-success text-white" onclick="window.print()">Print</button>
-                                </div>
-                            </div>
-                        </form>
+                       <form id="filterForm" action="{{ route('bukubesar.filter') }}" method="GET">
+    <div class="row g-3">
+        <input type="hidden" name="id_coa" value="all">
+
+        <div class="col-md-3">
+            <label class="fw-bold mb-1">Tanggal Awal :</label>
+            <input
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="start"
+                value="{{ $start }}"
+                required
+            >
+        </div>
+
+        <div class="col-md-3">
+            <label class="fw-bold mb-1">Tanggal Akhir :</label>
+            <input
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="end"
+                value="{{ $end }}"
+                required
+            >
+        </div>
+
+        <div class="col-md-6 d-flex align-items-end gap-2">
+            <button class="btn btn-primary" type="submit">Tampilkan</button>
+
+            <a href="{{ route('bukubesar.export', ['start' => $start, 'end' => $end]) }}"
+               class="btn btn-info text-white">
+                Export Excel
+            </a>
+
+            <!-- PENTING: type="button" -->
+            <button type="button" class="btn btn-success text-white" onclick="window.print()">
+                Print
+            </button>
+        </div>
+    </div>
+</form>
+
                     </div>
 
                     <h4 class="section-title">
-                        📘 Buku Besar | {{ $start ?? '-' }} s/d {{ $end ?? '-' }}
-                    </h4>
+                        📘 Buku Besar | Tanggal Awal: {{ $start ?? '-' }} , Tanggal Akhir: {{ $end ?? '-' }}                    </h4>
 
                     <div class="table-container shadow-sm mb-5">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover text-center mb-0">
+                        <div class="table-scroll-wrapper">
+    <table class="table table-bordered table-hover text-center mb-0">
+
                                 <thead>
                                     <tr>
                                         <th>Nomor Akun</th>
@@ -277,14 +336,20 @@
                                             <td class="text-end">{{ number_format($b->saldo_akhir ?? 0, 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
-                                    <tr style="font-weight:bold; background:#f4f6fa;">
-                                        <td colspan="2">TOTAL</td>
-                                        <td class="text-end">{{ number_format($total_saldo_awal, 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ number_format($total_debit, 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ number_format($total_kredit, 0, ',', '.') }}</td>
-                                        <td class="text-end">{{ number_format($total_saldo_akhir, 0, ',', '.') }}</td>
-                                    </tr>
+
                                 </tbody>
+                                </tbody>
+
+<tfoot>
+<tr>
+    <td colspan="2">TOTAL</td>
+    <td class="text-end">{{ number_format($total_saldo_awal, 0, ',', '.') }}</td>
+    <td class="text-end">{{ number_format($total_debit, 0, ',', '.') }}</td>
+    <td class="text-end">{{ number_format($total_kredit, 0, ',', '.') }}</td>
+    <td class="text-end">{{ number_format($total_saldo_akhir, 0, ',', '.') }}</td>
+</tr>
+</tfoot>
+
                             </table>
                         </div>
                     </div>
@@ -295,7 +360,24 @@
     </div>
 
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('filterForm');
+    const startInput = document.getElementById('startDate');
+    const endInput = document.getElementById('endDate');
+
+    form.addEventListener('submit', function (e) {
+        const startDate = new Date(startInput.value);
+        const endDate = new Date(endInput.value);
+
+        if (startDate > endDate) {
+            e.preventDefault(); // STOP submit
+            alert('⚠️ Tanggal Awal tidak boleh lebih besar dari Tanggal Akhir');
+            startInput.focus();
+        }
+    });
+});
+</script>
+
 </body>
 </html>

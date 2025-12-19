@@ -11,18 +11,20 @@
     <style>
         /* --- SIDEBAR CUSTOM --- */
         .left-sidebar {
-            width: 260px;
+            background-color: #2a3547 !important;
+            width: 270px;
             height: 100vh;
+<<<<<<< HEAD
             background-color: #2b3446 !important;
+=======
+>>>>>>> f06678120ed11095582c601398f2e9d0fc7c4f59
             position: fixed;
-            left: 0;
             top: 0;
+            left: 0;
             z-index: 100;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
         }
 
+<<<<<<< HEAD
         .sidebar-brand-text { color: #ffffff; font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 30px; margin-top: 10px; }
         .sidebar-nav ul { list-style: none; padding: 0; }
         .sidebar-link { color: #d1d5db !important; text-decoration: none; display: flex; align-items: center; padding: 12px 15px; font-size: 14px; border-radius: 8px; margin-bottom: 5px; }
@@ -31,6 +33,87 @@
         .sidebar-link.active::before { color: #fff; }
         .logout-wrapper { margin-top: auto; padding-bottom: 10px; }
         .btn-logout-red { background-color: #fa5a5a; color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: 600; text-align: left; padding-left: 20px; }
+=======
+        .left-sidebar h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff !important;
+            margin: 25px 0 15px;
+            padding-left: 25px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-item {
+            padding: 0 15px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-item .sidebar-link {
+            color: #c4d0e2 !important;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            border-radius: 7px;
+        }
+
+        /* Bullet point di depan menu */
+        .sidebar-item .sidebar-link::before {
+            content: "•";
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        .sidebar-item .sidebar-link.active {
+            background-color: #5d87ff !important;
+            color: #ffffff !important;
+        }
+
+        .sidebar-item .sidebar-link.active::before {
+            color: #ffffff;
+        }
+
+        /* ================================================= */
+        /* LOGOUT BUTTON (FIX DI BAWAH) */
+        /* ================================================= */
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .sidebar-logout-btn {
+            background-color: #ff4d4f !important;
+            color: #ffffff !important;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        .sidebar-logout-btn:hover {
+            background-color: #e04344 !important;
+            transform: translateY(-2px);
+        }
+>>>>>>> f06678120ed11095582c601398f2e9d0fc7c4f59
 
         /* --- CONTENT WRAPPER --- */
         .body-wrapper { margin-left: 260px; padding: 30px; background-color: #fff; min-height: 100vh; }
@@ -42,7 +125,7 @@
         .grand-total-box { background-color: #5d87ff; color: white; padding: 5px 12px; border-radius: 6px; font-weight: bold; }
         .grand-total-box-green { background-color: #13deb9; color: white; padding: 5px 12px; border-radius: 6px; font-weight: bold; }
         .title-section { font-size: 28px; font-weight: bold; color: #2a3547; }
-        
+
         @media print {
             .left-sidebar, .btn-print, .breadcrumb, .filter-section { display: none !important; }
             .body-wrapper { margin: 0 !important; width: 100% !important; }
@@ -53,6 +136,7 @@
 <body>
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebartype="full">
 
+<<<<<<< HEAD
         <aside class="left-sidebar">
             <div class="sidebar-brand-text">AKUNTANSI</div>
             <nav class="sidebar-nav">
@@ -69,6 +153,45 @@
                     @csrf
                     <button type="submit" class="btn-logout-red">Logout</button>
                 </form>
+=======
+       <aside class="left-sidebar">
+            <div class="p-3">
+                <div class="brand-logo d-flex align-items-center justify-content-center mb-4">
+                    <a href="#" class="text-nowrap logo-img">
+                        <img src="../assets/images/logos/logo.svg" alt="" width="150" />
+                    </a>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <ul>
+                        <h2>AKUNTANSI</h2>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link " href="{{ route('bukubesar') }}">Buku Besar</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link active" href="{{ route('neraca') }}">Neraca</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="#">Laporan</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="#">Pengaturan</a>
+                        </li>
+                    </ul>
+
+                    <div class="sidebar-bottom">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="sidebar-logout-btn">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </form>
+                    </div>
+                </nav>
+>>>>>>> f06678120ed11095582c601398f2e9d0fc7c4f59
             </div>
         </aside>
 

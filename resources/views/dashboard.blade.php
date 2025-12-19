@@ -8,7 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/dashboard.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
         /* ================================================= */
@@ -55,52 +55,71 @@
 
         .left-sidebar {
             background-color: #2a3547 !important;
+            width: 270px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
         }
 
         .left-sidebar h2 {
             font-size: 1.1rem;
             font-weight: 700;
             color: #ffffff !important;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            margin: 25px 0 15px;
+            padding-left: 25px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-item {
             padding: 0 15px;
-            letter-spacing: 0.5px;
+            margin-bottom: 4px;
         }
 
         .sidebar-item .sidebar-link {
             color: #c4d0e2 !important;
-            transition: all 0.2s ease-in-out;
-            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            transition: all 0.2s;
             font-weight: 500;
+            border-radius: 7px;
         }
 
-        .sidebar-item .sidebar-link i {
-            color: #c4d0e2 !important;
+        /* Bullet point di depan menu */
+        .sidebar-item .sidebar-link::before {
+            content: "•";
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: #6b7280;
         }
 
         .sidebar-item .sidebar-link.active {
             background-color: #5d87ff !important;
             color: #ffffff !important;
-            font-weight: 600;
         }
 
-        .sidebar-item .sidebar-link.active i {
-            color: #ffffff !important;
-        }
-
-        .sidebar-divider {
-            display: none !important;
+        .sidebar-item .sidebar-link.active::before {
+            color: #ffffff;
         }
 
         /* ================================================= */
-        /* LOGOUT PALING BAWAH + JADI TOMBOL MERAH */
+        /* LOGOUT BUTTON (FIX DI BAWAH) */
         /* ================================================= */
-
         .sidebar-bottom {
             position: absolute;
             bottom: 20px;
             left: 0;
             width: 100%;
+            padding: 0 15px;
         }
 
         .sidebar-logout-btn {
@@ -108,28 +127,25 @@
             color: #ffffff !important;
             font-weight: 600;
             border-radius: 10px;
-            padding: 10px 15px;
-            margin: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            transition: 0.2s ease-in-out;
-        }
-
-        .sidebar-logout-btn i {
-            color: #ffffff !important;
-            font-size: 18px;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            transition: 0.2s;
         }
 
         .sidebar-logout-btn:hover {
             background-color: #e04344 !important;
             transform: translateY(-2px);
         }
-
         .breadcrumb {
             font-size: 14px;
         }
-        
+
         .title-section {
             font-size: 1.5rem;
             font-weight: bold;
@@ -143,77 +159,49 @@
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
 
-        <aside class="left-sidebar">
+       <aside class="left-sidebar">
             <div class="p-3">
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="../assets/images/logos/logo.svg" alt="" />
+                <div class="brand-logo d-flex align-items-center justify-content-center mb-4">
+                    <a href="#" class="text-nowrap logo-img">
+                        <img src="../assets/images/logos/logo.svg" alt="" width="150" />
                     </a>
-                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                        <i class="ti ti-x fs-6"></i>
-                    </div>
                 </div>
 
-                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-                    <ul id="sidebarnav">
-                        <h2 class="ps-3 pt-3">AKUNTANSI</h2>
-
+                <nav class="sidebar-nav">
+                    <ul>
+                        <h2>AKUNTANSI</h2>
                         <li class="sidebar-item">
-                            <a class="sidebar-link active" href="{{ route('dashboard') }}" aria-expanded="false">
-                                <i class="ti ti-layout-dashboard"></i>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
+                            <a class="sidebar-link active" href="{{ route('dashboard') }}">Dashboard</a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('bukubesar') }}" aria-expanded="false">
-                                <i class="ti ti-notebook"></i>
-                                <span class="hide-menu">Buku Besar</span>
-                            </a>
+                            <a class="sidebar-link " href="{{ route('bukubesar') }}">Buku Besar</a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('neraca') }}" aria-expanded="false">
-                                <i class="ti ti-file-analytics"></i>
-                                <span class="hide-menu">Neraca</span>
-                            </a>
+                            <a class="sidebar-link" href="{{ route('neraca') }}">Neraca</a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="#" aria-expanded="false">
-                                <i class="ti ti-report"></i>
-                                <span class="hide-menu">Laporan</span>
-                            </a>
+                            <a class="sidebar-link" href="#">Laporan</a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="#" aria-expanded="false">
-                                <i class="ti ti-settings"></i>
-                                <span class="hide-menu">Pengaturan</span>
-                            </a>
+                            <a class="sidebar-link" href="#">Pengaturan</a>
                         </li>
-
-                        <li class="sidebar-item sidebar-bottom">
-                            <a class="sidebar-logout-btn" href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ti ti-logout"></i>
-                                <span>Logout</span>
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-
                     </ul>
+
+                    <div class="sidebar-bottom">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="sidebar-logout-btn">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </form>
+                    </div>
                 </nav>
             </div>
         </aside>
-
         <div class="body-wrapper">
             <div class="container-fluid">
                 <div class="my-custom-center-container">
-                    
+
                     @if(session('login'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('login') }}
@@ -222,14 +210,14 @@
                     @endif
 
                     <div class="title-section">Keuangan & Akuntansi</div>
-                    
+
                     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-4">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
-                    
+
                     <div class="row">
                          </div>
 

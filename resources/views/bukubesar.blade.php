@@ -360,24 +360,27 @@
     </div>
 
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script>
+   <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('filterForm');
-    const startInput = document.getElementById('startDate');
-    const endInput = document.getElementById('endDate');
+    const form = document.querySelector('form[action*="bukubesar"]');
+    const startInput = document.querySelector('input[name="start"]');
+    const endInput = document.querySelector('input[name="end"]');
+
+    if (!form || !startInput || !endInput) return;
 
     form.addEventListener('submit', function (e) {
         const startDate = new Date(startInput.value);
         const endDate = new Date(endInput.value);
 
         if (startDate > endDate) {
-            e.preventDefault(); // STOP submit
+            e.preventDefault();
             alert('⚠️ Tanggal Awal tidak boleh lebih besar dari Tanggal Akhir');
             startInput.focus();
         }
     });
 });
 </script>
+
 
 </body>
 </html>

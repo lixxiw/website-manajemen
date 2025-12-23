@@ -116,7 +116,7 @@
                         <thead style="background: #f8fafd; color: #2a3547;">
                             <tr>
                                 <th>Nomor Akun</th>
-                                <th>Akun</th>
+                                <th>Aun</th>
                                 <th>Saldo Awal</th>
                                 <th>Debit</th>
                                 <th>Kredit</th>

@@ -339,17 +339,15 @@
 
                                 </tbody>
                                 </tbody>
-
-<tfoot>
-<tr>
-    <td colspan="2">TOTAL</td>
-    <td class="text-end">{{ number_format($total_saldo_awal, 0, ',', '.') }}</td>
-    <td class="text-end">{{ number_format($total_debit, 0, ',', '.') }}</td>
-    <td class="text-end">{{ number_format($total_kredit, 0, ',', '.') }}</td>
-    <td class="text-end">{{ number_format($total_saldo_akhir, 0, ',', '.') }}</td>
-</tr>
-</tfoot>
-
+                                 <tfoot>
+                                  <tr>
+                                    <td colspan="2">TOTAL</td>
+                                    <td class="text-end">{{ number_format($total_saldo_awal, 0, ',', '.') }}</td>
+                                    <td class="text-end">{{ number_format($total_debit, 0, ',', '.') }}</td>
+                                    <td class="text-end">{{ number_format($total_kredit, 0, ',', '.') }}</td>
+                                    <td class="text-end">{{ number_format($total_saldo_akhir, 0, ',', '.') }}</td>
+                                  </tr>
+                                 </tfoot>
                             </table>
                         </div>
                     </div>
